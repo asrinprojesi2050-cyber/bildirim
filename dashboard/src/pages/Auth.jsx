@@ -12,7 +12,7 @@ function Auth({ onLogin }) {
     e.preventDefault();
     setError('');
 
-    const url = isLogin ? '`$API_URL/api/auth/login' : '`$API_URL/api/auth/register';
+    const url = isLogin ? `${API_URL}/api/auth/login` : `${API_URL}/api/auth/register`;
     
     try {
       const res = await fetch(url, {
