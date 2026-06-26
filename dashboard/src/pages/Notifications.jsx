@@ -3,7 +3,6 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 import { Plus, Trash2, Edit2, Eye, EyeOff, MousePointer } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 function Notifications({ storeId }) {
   const [notifications, setNotifications] = useState([]);
