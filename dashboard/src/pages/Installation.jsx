@@ -7,13 +7,13 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 function Installation({ storeId }) {
   const STORE_ID = storeId;
-  const WIDGET_URL = '`$API_URL/widget.js';
+  const WIDGET_URL = `${API_URL}/widget.js`;
   const embedCode = `<script src="${WIDGET_URL}" data-store="${STORE_ID}" async></script>`;
 
   const [copied, setCopied] = useState(false);
   const [copiedWebhook, setCopiedWebhook] = useState(false);
 
-  const webhookUrl = ``$API_URL/api/webhooks/order/${STORE_ID}`;
+  const webhookUrl = `${API_URL}/api/webhooks/order/${STORE_ID}`;
 
   const copyToClipboard = (text, setCopiedState) => {
     navigator.clipboard.writeText(text);

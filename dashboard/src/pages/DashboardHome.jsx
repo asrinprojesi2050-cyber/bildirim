@@ -8,7 +8,7 @@ function DashboardHome({ storeId }) {
   const STORE_ID = storeId;
 
   useEffect(() => {
-    fetch(``$API_URL/api/settings/${STORE_ID}`)
+    fetch(`${API_URL}/api/settings/${STORE_ID}`)
       .then(res => res.json())
       .then(data => {
         if (data.error) throw new Error(data.error);
@@ -16,7 +16,7 @@ function DashboardHome({ storeId }) {
       })
       .catch(err => console.error("Ayarlar çekilemedi:", err));
 
-    fetch(``$API_URL/api/notifications/${STORE_ID}`)
+    fetch(`${API_URL}/api/notifications/${STORE_ID}`)
       .then(res => res.json())
       .then(data => {
         if (data.error) throw new Error(data.error);
@@ -30,7 +30,7 @@ function DashboardHome({ storeId }) {
 
   const saveSettings = (e) => {
     e.preventDefault();
-    fetch(``$API_URL/api/settings/${STORE_ID}`, {
+    fetch(`${API_URL}/api/settings/${STORE_ID}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(settings)
