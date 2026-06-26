@@ -19,7 +19,7 @@ function Notifications({ storeId }) {
   const STORE_ID = storeId;
 
   const fetchNotifications = () => {
-    fetch(``$API_URL/api/notifications/${STORE_ID}`)
+    fetch(`${API_URL}/api/notifications/${STORE_ID}`)
       .then(res => res.json())
       .then(data => setNotifications(data))
       .catch(err => console.error("Bildirimler çekilemedi:", err));
@@ -31,7 +31,7 @@ function Notifications({ storeId }) {
 
   const handleDelete = (id) => {
     if(window.confirm("Bu bildirimi silmek istediğinize emin misiniz?")) {
-      fetch(``$API_URL/api/notifications/${id}`, { method: 'DELETE' })
+      fetch(`${API_URL}/api/notifications/${id}`, { method: 'DELETE' })
         .then(() => fetchNotifications());
     }
   };
@@ -40,7 +40,7 @@ function Notifications({ storeId }) {
     const notif = notifications.find(n => n.id === id);
     if(!notif) return;
     
-    fetch(``$API_URL/api/notifications/${id}`, {
+    fetch(`${API_URL}/api/notifications/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...notif, isActive: !currentStatus })
@@ -63,8 +63,8 @@ function Notifications({ storeId }) {
     e.preventDefault();
     
     const url = editingId 
-      ? ``$API_URL/api/notifications/${editingId}`
-      : ``$API_URL/api/notifications`;
+      ? `${API_URL}/api/notifications/${editingId}`
+      : `${API_URL}/api/notifications`;
       
     const method = editingId ? 'PUT' : 'POST';
 
