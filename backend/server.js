@@ -37,15 +37,15 @@ app.post('/api/auth/register', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
         
+        // Varsayılan ayarları oluştur (foreign key olduğu için önce bu)
+        await db.query(`INSERT INTO settings ("storeId") VALUES ($1)`, [storeId]);
+        
         // Postgres: Use RETURNING id
         const result = await db.query(
             `INSERT INTO users (email, password, "storeId") VALUES ($1, $2, $3) RETURNING id`,
             [email, hashedPassword, storeId]
         );
         const userId = result.rows[0].id;
-        
-        // Varsayılan ayarları oluştur
-        await db.query(`INSERT INTO settings ("storeId") VALUES ($1)`, [storeId]);
         
         const token = jwt.sign({ userId, storeId, email }, JWT_SECRET, { expiresIn: '7d' });
         res.json({ token, storeId, email });
