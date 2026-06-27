@@ -1,7 +1,7 @@
 (function() {
     // Bidlirim - Premium Sales Notification Widget
-    const B_URL = "http://localhost:3001"; 
     const currentScript = document.currentScript;
+    const B_URL = currentScript ? new URL(currentScript.src).origin : "http://localhost:3001";
     const storeId = currentScript ? currentScript.getAttribute('data-store') : 'demo-store-123';
 
     if (!storeId) return;
