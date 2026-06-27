@@ -10,6 +10,26 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [storeId, setStoreId] = useState(localStorage.getItem('storeId'));
 
+  useEffect(() => {
+    // URL'den token ve storeId'yi çek (İkas Embedded App için)
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlToken = urlParams.get('token');
+    const urlStoreId = urlParams.get('storeId');
+    const urlEmail = urlParams.get('email');
+
+    if (urlToken && urlStoreId) {
+      localStorage.setItem('token', urlToken);
+      localStorage.setItem('storeId', urlStoreId);
+      if (urlEmail) localStorage.setItem('email', urlEmail);
+      
+      setToken(urlToken);
+      setStoreId(urlStoreId);
+
+      // URL'yi temizle (Token'ı gizle)
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
+
   const handleLogin = (data) => {
     setToken(data.token);
     setStoreId(data.storeId);
@@ -54,6 +74,8 @@ function App() {
               Kurulum
             </NavLink>
             
+            
+            {/* Gömülü İkas modundayken Çıkış Yap butonunu gizle (İsteğe bağlı, şimdilik URL'de iframe kontrolü yapmıyoruz ama estetik için ayırıyoruz) */}
             <a href="#" onClick={(e) => { e.preventDefault(); handleLogout(); }} style={{ marginTop: 'auto', color: '#ef4444' }}>
               <LogOut size={20} />
               Çıkış Yap
